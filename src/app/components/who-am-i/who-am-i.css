@@ -1,0 +1,24 @@
+main {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tarjeta-usuario,
+.info-usuario {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.info-usuario img {
+  width: 300px;
+  border-radius: 50%;
+  border: 2px solid gray;
+}
+
+.info-usuario span {
+  text-align: center;
+}

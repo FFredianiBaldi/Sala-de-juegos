@@ -1,1 +1,47 @@
-<p>who-am-i works!</p>
+<main>
+  @if(user()) {
+    <div class="tarjeta-usuario">
+      <div class="info-usuario">
+
+        <!-- foto de perfil -->
+        <img
+          [src]="user()?.avatar_url"
+          [alt]="user()?.name"
+        >
+
+        <!-- nombre -->
+        <span>{{user()?.name}}</span>
+
+        <!-- stats -->
+        <div class="stats">
+
+          <!-- repos publicos -->
+          <span>Public repos: {{user()?.public_repos}} </span>
+
+          <!-- seguidores -->
+          <span>Followers: {{user()?.followers}} </span>
+
+          <!-- seguidos -->
+          <span>Following: {{user()?.following}}</span>
+
+        </div>
+
+      </div>
+    </div>
+  }
+
+  <div class="juego-descripcion">
+
+    <h2>Juego elegido: Simon dice</h2>
+    <p>Poné a prueba tu memoria repitiendo la secuencia correcta de colores y sonidos.</p><br>
+    <p>En cada ronda el juego agregará un nuevo paso y tendrás que recordar toda la combinación sin equivocarte.</p><br><br>
+    <p>Cuanto más avances:</p><br>
+    <ul>
+      <li>más larga será la secuencia</li>
+      <li>mayor será la dificultad</li>
+      <li>más rápido tendrás que reaccionar</li>
+    </ul><br><br>
+    <p>¿Hasta qué nivel podés llegar sin cometer errores?</p>
+
+  </div>
+</main>

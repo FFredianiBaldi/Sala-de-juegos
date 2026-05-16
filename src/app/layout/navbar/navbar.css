@@ -1,0 +1,35 @@
+
+.container-fluid {
+  width: 60vw;
+}
+
+.navbar-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+}
+
+.info-btn {
+  width: 30px;
+}
+
+.logo-img {
+  width: 130px;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .container-fluid {
+    width: 100vw;
+  }
+
+  .logo-img {
+    width: 100px;
+  }
+
+  .right-col .btn {
+    padding: 4px 8px;
+    font-size: 14px;
+  }
+}

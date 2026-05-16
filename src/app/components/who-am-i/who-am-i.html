@@ -1,0 +1,46 @@
+<main class="d-flex flex-column justify-content-center align-items-center w-100">
+  @if(user()) {
+    <div class="d-flex flex-column justify-content-center mt-2">
+      <div class="d-flex flex-column justify-content-center">
+
+        <!-- foto de perfil -->
+        <img
+          [src]="user()?.avatar_url"
+          [alt]="user()?.name"
+          class="rounded-circle img-usuario"
+        >
+
+        <!-- nombre -->
+        <span class="text-center fs-3">{{user()?.name}}</span>
+
+        <!-- stats -->
+        <div class="stats d-flex gap-3 justify-content-center">
+
+          <!-- repos publicos -->
+          <p class="d-flex flex-column fs-6">Public repos<span class="text-center text-primary fs-4">{{user()?.public_repos}}</span> </p>
+
+          <!-- seguidores -->
+          <p class="d-flex flex-column fs-6">Followers<span class="text-center text-primary fs-4">{{user()?.followers}}</span> </p>
+
+          <!-- seguidos -->
+          <p class="d-flex flex-column fs-6">Following<span class="text-center text-primary fs-4">{{user()?.following}}</span></p>
+
+        </div>
+
+      </div>
+    </div>
+  }
+
+  <div class="juego-descripcion text-center">
+
+    <h2 class="fs-1 text-decoration-underline">Juego elegido: Simon dice</h2>
+    <p class="fs-5">Poné a prueba tu memoria repitiendo la secuencia correcta de colores y sonidos.<br>
+    En cada ronda el juego agregará un nuevo paso y tendrás que recordar toda la combinación sin equivocarte.<br><br>
+    Cuanto más avances:<br>
+    más larga será la secuencia<br>
+    mayor será la dificultad<br>
+    más rápido tendrás que reaccionar<br><br>
+    ¿Hasta qué nivel podés llegar sin cometer errores?
+    </p>
+  </div>
+</main>

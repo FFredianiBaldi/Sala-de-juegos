@@ -1,16 +1,17 @@
-<main>
+<main class="d-flex flex-column justify-content-center align-items-center w-100">
   @if(user()) {
-    <div class="tarjeta-usuario">
-      <div class="info-usuario">
+    <div class="d-flex flex-column justify-content-center mt-2">
+      <div class="d-flex flex-column justify-content-center">
 
         <!-- foto de perfil -->
         <img
           [src]="user()?.avatar_url"
           [alt]="user()?.name"
+          class="rounded-circle img-usuario"
         >
 
         <!-- nombre -->
-        <span>{{user()?.name}}</span>
+        <span class="text-center">{{user()?.name}}</span>
 
         <!-- stats -->
         <div class="stats">

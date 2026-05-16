@@ -1,43 +1,14 @@
+
 .container-fluid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-
-  align-items: center;
-
   width: 60vw;
-  border-radius: 10px;
 }
 
 .info-btn {
   width: 30px;
 }
 
-.who-am-i,
-.logo,
-.btns {
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.who-am-i {
-  justify-self: start;
-  justify-content: start;
-}
-
-.logo {
-  justify-self: center;
-  justify-content: center;
-}
-
 .logo-img {
   width: 130px;
   margin: 0;
   padding: 0;
-}
-
-.btns {
-  justify-self: end;
-  gap: 10px;
-  justify-content: end;
 }

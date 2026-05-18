@@ -1,5 +1,6 @@
-<div>
-  <img [src]="img_url">
-  <p>nombre: {{nombre}}</p>
-  <p>descripcion: {{descripcion}}</p>
+<div class="d-flex flex-column bg-black justify-content-center align-items-center rounded-3 p-3 m-3 shadow" style="width: 400px;">
+  <img [src]="img_url" class="rounded-3" style="width: 300px;">
+  <p class="fs-3">{{nombre}}</p>
+  <p>{{descripcion}}</p>
+  <button class="btn btn-primary">Jugar!</button>
 </div>

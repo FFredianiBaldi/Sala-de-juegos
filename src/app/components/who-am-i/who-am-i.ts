@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { GithubServiceTs } from '../../services/github.service.ts';
+import { GithubService } from '../../services/github.service';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { GithubServiceTs } from '../../services/github.service.ts';
 })
 export class WhoAmI {
 
-  private githubService = inject(GithubServiceTs);
+  private githubService = inject(GithubService);
 
   user = toSignal(this.githubService.getUser());
 

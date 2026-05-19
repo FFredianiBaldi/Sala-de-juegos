@@ -1,13 +1,13 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
-    <div class="col-12 cold-md-6 col-lg-4">
-      <div class="card shadow border-secondary">
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card shadow border-secondary rounded-4">
         <div class="card-body p-4">
           <h2 class="text-center mb-4">
             Crear cuenta
           </h2>
 
-          <form (submit)="submit()">
+          <form (ngSubmit)="submit()">
 
             <div>
               <label class="form-label">Email:</label><br>
@@ -15,10 +15,12 @@
                 type="email"
                 [formField]="registerForm.email"
                 class="form-control"
-                [class.is-invalid]="(registerForm.email().touched() || submitted() && registerForm.email().invalid())"
+                [class.is-invalid]="(registerForm.email().touched() || submitted()) && registerForm.email().invalid()"
               />
 
-              @if (registerForm.email().touched() || submitted() && registerForm.email().invalid()) {
+              @if (
+                (registerForm.email().touched() || submitted()) && registerForm.email().invalid()
+              ) {
                 <br><small class="invalid-feedback">Email inválido</small>
               }
             </div>
@@ -56,17 +58,19 @@
                 type="password"
                 [formField]="registerForm.password"
                 class="form-control"
-                [class.is-invalid]="(registerForm.password().touched() || submitted() && registerForm.password().invalid())"
+                [class.is-invalid]="(registerForm.password().touched() || submitted()) && registerForm.password().invalid()"
               />
 
-              @if (registerForm.password().touched() || submitted() && registerForm.password().invalid()) {
+              @if (
+                (registerForm.password().touched() || submitted()) && registerForm.password().invalid()
+              ) {
                 <br><small class="invalid-feedback">Contraseña inválida</small>
               }
             </div>
 
             <div class="d-grid">
-              <button type="submit" class="btn btn-primary btn-lg">
-                Registrarse
+              <button type="submit" class="btn btn-primary btn-lg" [disabled]="loading()">
+                {{loading() ? 'Registrando...' : 'Registrarse' }}
               </button>
             </div>
 

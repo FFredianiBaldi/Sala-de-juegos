@@ -1,1 +1,84 @@
-<p>register works!</p>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 cold-md-6 col-lg-4">
+      <div class="card shadow border-secondary">
+        <div class="card-body p-4">
+          <h2 class="text-center mb-4">
+            Crear cuenta
+          </h2>
+
+          <form (submit)="submit()">
+
+            <div>
+              <label class="form-label">Email:</label><br>
+              <input
+                type="email"
+                [formField]="registerForm.email"
+                class="form-control"
+                [class.is-invalid]="(registerForm.email().touched() || submitted() && registerForm.email().invalid())"
+              />
+
+              @if (registerForm.email().touched() || submitted() && registerForm.email().invalid()) {
+                <br><small class="invalid-feedback">Email inválido</small>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Nombre:</label><br>
+              <input
+                type="text"
+                [formField]="registerForm.nombre"
+                class="form-control"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Apellido:</label><br>
+              <input
+                type="text"
+                [formField]="registerForm.apellido"
+                class="form-control"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Edad:</label><br>
+              <input
+                type="number"
+                [formField]="registerForm.edad"
+                class="form-control"
+              />
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">Contraseña:</label><br>
+              <input
+                type="password"
+                [formField]="registerForm.password"
+                class="form-control"
+                [class.is-invalid]="(registerForm.password().touched() || submitted() && registerForm.password().invalid())"
+              />
+
+              @if (registerForm.password().touched() || submitted() && registerForm.password().invalid()) {
+                <br><small class="invalid-feedback">Contraseña inválida</small>
+              }
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary btn-lg">
+                Registrarse
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+

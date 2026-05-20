@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-game-card',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './game-card.html',
   styleUrl: './game-card.css',
 })

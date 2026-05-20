@@ -1,59 +1,38 @@
 # SalaDeJuegos
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
+Proyecto realizado para la materia Programación IV utilizando Angular y Bootstrap.
 
-## Development server
+---
 
-To start a local development server, run:
+## Alumno
 
-```bash
-ng serve
-```
+**Federico Frediani Baldi**
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Deploy
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+https://sala-de-juegos-six-rho.vercel.app/
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Tecnologías utilizadas
 
-```bash
-ng generate --help
-```
+- Angular
+- Bootstrap
+- Supabase
+- TypeScript
 
-## Building
+---
 
-To build the project run:
+## Sprints
 
-```bash
-ng build
-```
+### Sprint 1
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+En este sprint se desarrolló la estructura principal de la aplicación junto con el componente **Quién Soy**, donde se muestran datos del perfil de GitHub y una descripción del juego elegido para el proyecto: **Simon Dice**.
 
-## Running unit tests
+---
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### Sprint 2
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Se implementó el sistema de autenticación de usuarios con registro e inicio de sesión. También se agregaron los juegos al home principal y se realizaron mejoras visuales generales, incluyendo un rediseño en modo oscuro y cambios en estilos, bordes y redondeado de componentes.

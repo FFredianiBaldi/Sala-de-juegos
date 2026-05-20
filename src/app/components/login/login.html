@@ -1,1 +1,100 @@
-<p>login works!</p>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card shadow border-secondary rounded-4">
+        <div class="card-body p-4">
+
+          <h2 class="text-center mb-4">
+            Iniciar sesión
+          </h2>
+
+          <form (ngSubmit)="submit()">
+            <div>
+              <label class="form-label">Email:</label><br>
+
+              <input
+                type="email"
+                [formField]="loginForm.email"
+                class="form-control"
+                [class.is-invalid]="(loginForm.email().touched() || submitted()) && loginForm.email().invalid()"
+              />
+
+              @if (
+                (loginForm.email().touched() || submitted()) && loginForm.email().invalid()
+              ) {
+                <br><small class="invalid-feedback">Email inválido</small>
+              }
+            </div>
+
+            <div>
+              <label class="form-label">Contraseña:</label><br>
+
+              <input
+                type="password"
+                [formField]="loginForm.password"
+                class="form-control"
+                [class.is-invalid]="(loginForm.password().touched() || submitted()) && loginForm.password().invalid()"
+              />
+
+              @if (
+                (loginForm.password().touched() || submitted()) && loginForm.password().invalid()
+              ) {
+                <br><small class="invalid-feedback">Email inválido</small>
+              }
+            </div>
+
+            <br>
+
+            <div class="d-grid">
+              <button
+                type="submit"
+                [disabled]="loading()"
+                class="btn btn-primary btn-lg"
+              >
+                {{loading() ? 'Ingresando...' : 'Ingresar' }}
+              </button>
+            </div>
+
+            <hr>
+
+            <div class="d-flex flex-column gap-2">
+
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="quickLogin('test1@gmail.com')"
+              >
+                Ingresar como Test 1
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="quickLogin('test2@gmail.com')"
+              >
+                Ingresar como Test 2
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="quickLogin('test3@gmail.com')"
+              >
+                Ingresar como Test 3
+              </button>
+
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-error
+  modalId="errorModal"
+  [title]="''"
+  [message]="''"
+></app-error>

@@ -5,7 +5,7 @@ import { GithubUser } from '../interfaces/interfaces';
 @Injectable({
   providedIn: 'root',
 })
-export class GithubServiceTs {
+export class GithubService {
 
   private http = inject(HttpClient);
   private apiUrl = 'https://api.github.com/users/FFredianiBaldi'

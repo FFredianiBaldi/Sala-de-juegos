@@ -8,3 +8,11 @@ export interface GithubUser {
   public_repos: number;
   html_url: string;
 }
+
+export interface User {
+  email: string;
+  nombre: string;
+  apellido: string;
+  edad: number;
+  password: string;
+}

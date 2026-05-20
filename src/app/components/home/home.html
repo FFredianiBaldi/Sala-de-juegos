@@ -1,1 +1,6 @@
-<p>home works!</p>
+<div class="games-grid">
+  @for (game of games; track $index) {
+    <app-game-card [nombre]="game['nombre']" [descripcion]="game['descripcion']" [img_url]="game['img_url']"></app-game-card>
+  }
+</div>
+

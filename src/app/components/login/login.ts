@@ -59,4 +59,16 @@ export class Login {
       this.loading.set(false);
     }
   }
+
+  async quickLogin(email:string) {
+    this.userModel.set({
+      email:email,
+      password:'contraseña1234',
+      nombre: '',
+      apellido: '',
+      edad: 0
+    });
+
+    await this.submit;
+  }
 }

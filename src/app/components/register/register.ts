@@ -1,8 +1,9 @@
 import { Component, signal } from '@angular/core';
-import { UserRegister } from '../../interfaces/interfaces';
+import { User } from '../../interfaces/interfaces';
 import { form, required, email, minLength, FormField } from '@angular/forms/signals'
 import { UserService } from '../../services/user.service';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -14,11 +15,11 @@ export class Register {
 
   loading = signal(false);
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   submitted = signal(false);
 
-  userModel = signal<UserRegister>({
+  userModel = signal<User>({
     email: '',
     nombre: '',
     apellido: '',
@@ -55,7 +56,8 @@ export class Register {
 
       await this.userService.register(this.userModel());
 
-      console.log('Usuario registrado correctamente');
+      await this.userService.login(this.userModel());
+      this.router.navigate(['']);
     } catch (error:any) {
       console.error(error);
     } finally {

@@ -9,7 +9,7 @@ export interface GithubUser {
   html_url: string;
 }
 
-export interface UserRegister {
+export interface User {
   email: string;
   nombre: string;
   apellido: string;

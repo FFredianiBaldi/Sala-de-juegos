@@ -15,10 +15,39 @@
       </a>
     </div>
 
-    <!-- botones registro/login -->
-     <div class="right-col d-flex align-items-center w-100 justify-content-end d-flex gap-2">
-        <a routerLink="/login" type="button" class="btn btn-outline-primary">Login</a>
-        <a routerLink="/register" class="btn btn-primary">Register</a>
-     </div>
+
+    <!-- verificacion logueado -->
+    @if (userService.currentUser()) {
+      <div class="right-col d-flex align-items-center w-100 justify-content-end">
+
+        <div class="dropdown">
+          <button
+            class="btn btn-primary dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+          >
+            Hola, {{ userService.currentUser()?.nombre }}!
+          </button>
+
+          <ul class="dropdown-menu">
+            <li>
+              <button
+                class="dropdown-item"
+                (click)="logout()"
+              >
+                Cerrar sesión
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    } @else {
+      <!-- botones registro/login -->
+       <div class="right-col d-flex align-items-center w-100 justify-content-end d-flex gap-2">
+          <a routerLink="/login" type="button" class="btn btn-outline-primary">Login</a>
+          <a routerLink="/register" class="btn btn-primary">Register</a>
+       </div>
+    }
   </div>
+
 </nav>

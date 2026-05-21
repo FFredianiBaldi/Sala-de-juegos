@@ -20,6 +20,7 @@ export class Register {
   submitted = signal(false);
 
   userModel = signal<User>({
+    id: 0,
     email: '',
     nombre: '',
     apellido: '',

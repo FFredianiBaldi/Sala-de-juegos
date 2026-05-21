@@ -1,1 +1,29 @@
-<p>ahorcado works!</p>
+<p>Puntaje: {{ puntaje() }} | Tiempo: {{tiempo()}}s</p>
+
+<h1>{{ palabraOculta().join('') }}</h1>
+
+<p>Errores: {{ errores() }}/{{maxErrores}}</p>
+
+<div class="d-flex flex-wrap gap-2">
+  @for (letra of abecedario; track letra) {
+    <button class="btn btn-primary" [disabled]="letrasAdivinadas().includes(letra) || gano() || perdio()" (click)="elegirLetra(letra)">
+      {{ letra }}
+    </button>
+  }
+</div>
+
+@if (gano()) {
+  <h2>Ganaste</h2>
+
+  <button class="btn btn-primary" (click)="iniciarJuego()">
+    Reiniciar
+  </button>
+}
+
+@if (perdio()) {
+  <h2>Perdiste</h2>
+
+  <button class="btn btn-primary" (click)="iniciarJuego()">
+    Reiniciar
+  </button>
+}

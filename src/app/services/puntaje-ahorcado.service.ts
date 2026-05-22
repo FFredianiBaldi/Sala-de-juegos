@@ -1,15 +1,22 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { User } from '../interfaces/interfaces';
 import { enviroment } from '../../environments/environments';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PuntajeAhorcadoService {
   private supabase: SupabaseClient = createClient(enviroment.supabaseUrl, enviroment.supabaseKey);
+  private userService = inject(UserService);
 
-  async obtenerRecord(user: User) {
+  async obtenerRecord() {
+
+    this.userService.loadUser();
+    const user = this.userService.currentUser();
+
+    if(!user) return;
+
     const { data, error } = await this.supabase
       .from('puntajes_ahorcado')
       .select('*')
@@ -24,8 +31,14 @@ export class PuntajeAhorcadoService {
     return data;
   }
 
-  async subirRecord(puntaje: number, user: User, palabra: string, tiempoSegundos: number, letrasSeleccionadas: number) {
-    const recordActual = await this.obtenerRecord(user);
+  async subirRecord(puntaje: number, palabra: string, tiempoSegundos: number, letrasSeleccionadas: number) {
+
+    this.userService.loadUser();
+    const user = this.userService.currentUser();
+
+    if(!user) return;
+
+    const recordActual = await this.obtenerRecord();
 
     // si no hay record
     if(!recordActual) {

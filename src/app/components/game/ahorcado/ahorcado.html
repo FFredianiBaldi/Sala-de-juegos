@@ -1,29 +1,130 @@
-<p>Puntaje: {{ puntaje() }} | Tiempo: {{tiempo()}}s</p>
+<div class="container py-5">
 
-<h1>{{ palabraOculta().join('') }}</h1>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
 
-<p>Errores: {{ errores() }}/{{maxErrores}}</p>
+      <div class="card shadow-lg border-0">
 
-<div class="d-flex flex-wrap gap-2">
-  @for (letra of abecedario; track letra) {
-    <button class="btn btn-primary" [disabled]="letrasAdivinadas().includes(letra) || gano() || perdio()" (click)="elegirLetra(letra)">
-      {{ letra }}
-    </button>
-  }
+        <div class="card-body p-4">
+
+          <h1 class="text-center mb-4">
+            Ahorcado
+          </h1>
+
+          <div class="d-flex justify-content-center gap-4 mb-4">
+
+            <div class="text-center">
+              <h6 class="text-muted mb-1">Puntaje</h6>
+              <h3 class="fw-bold text-primary">
+                {{ puntaje() }}
+              </h3>
+            </div>
+
+            <div class="text-center">
+              <h6 class="text-muted mb-1">Tiempo</h6>
+              <h3 class="fw-bold text-success">
+                {{ tiempo() }}s
+              </h3>
+            </div>
+
+            <div class="text-center">
+              <h6 class="text-muted mb-1">Record</h6>
+              <h3 class="fw-bold text-warning">
+                {{ record() ?? 0 }}
+              </h3>
+            </div>
+
+          </div>
+
+          <div class="text-center mb-4">
+
+            <h1 class="display-4 fw-bold tracking-widest">
+              {{ palabraOculta().join(' ') }}
+            </h1>
+
+          </div>
+
+          <div class="text-center mb-4">
+
+            <div class="progress" style="height: 25px;">
+              <div
+                class="progress-bar bg-danger"
+                [style.width.%]="(errores() / maxErrores) * 100">
+
+                {{ errores() }}/{{ maxErrores }} errores
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+
+            @for (letra of abecedario; track letra) {
+
+              <button
+                class="btn btn-outline-primary fw-bold"
+                [disabled]="letrasAdivinadas().includes(letra) || gano() || perdio()"
+                (click)="elegirLetra(letra)">
+
+                {{ letra }}
+
+              </button>
+
+            }
+
+          </div>
+
+          @if (gano()) {
+
+            <div class="alert alert-success text-center">
+
+              <h2 class="mb-3">
+                Ganaste
+              </h2>
+
+              <button
+                class="btn btn-success px-4"
+                (click)="iniciarJuego()">
+
+                Reiniciar
+
+              </button>
+
+            </div>
+
+          }
+
+          @if (perdio()) {
+
+            <div class="alert alert-danger text-center">
+
+              <h2 class="mb-3">
+                Perdiste
+              </h2>
+
+              <p class="mb-3">
+                La palabra era:
+                <strong>{{ palabra() }}</strong>
+              </p>
+
+              <button
+                class="btn btn-danger px-4"
+                (click)="iniciarJuego()">
+
+                Reiniciar
+
+              </button>
+
+            </div>
+
+          }
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
 </div>
-
-@if (gano()) {
-  <h2>Ganaste</h2>
-
-  <button class="btn btn-primary" (click)="iniciarJuego()">
-    Reiniciar
-  </button>
-}
-
-@if (perdio()) {
-  <h2>Perdiste</h2>
-
-  <button class="btn btn-primary" (click)="iniciarJuego()">
-    Reiniciar
-  </button>
-}

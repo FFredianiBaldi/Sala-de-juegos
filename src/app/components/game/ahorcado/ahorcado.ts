@@ -1,5 +1,4 @@
 import { Component, inject, signal } from '@angular/core';
-import { UserService } from '../../../services/user.service';
 import { PuntajeAhorcadoService } from '../../../services/puntaje-ahorcado.service';
 
 @Component({
@@ -11,6 +10,7 @@ import { PuntajeAhorcadoService } from '../../../services/puntaje-ahorcado.servi
 export class Ahorcado {
   constructor() {
     this.iniciarJuego();
+    this.obtenerRecord();
   }
 
   abecedario = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('');
@@ -25,8 +25,9 @@ export class Ahorcado {
   tiempo = signal(0);
   intervalo: any;
 
-  userService = inject(UserService);
   puntajeAhorcadoService = inject(PuntajeAhorcadoService);
+
+  record = signal<number | null>(null);
 
   palabras = [
     'ANGULAR',
@@ -79,6 +80,7 @@ export class Ahorcado {
         clearInterval(this.intervalo);
         this.puntaje.update( p => p + this.calcularBonusTiempo());
         await this.subirRecord();
+        await this.obtenerRecord();
       }
     } else {
       this.errores.update(e => e + 1);
@@ -103,19 +105,20 @@ export class Ahorcado {
   }
 
   async subirRecord() {
-    this.userService.loadUser();
-
-    const user = this.userService.currentUser();
-
-    if(!user) return;
 
     await this.puntajeAhorcadoService.subirRecord(
       this.puntaje(),
-      user,
       this.palabra(),
       this.tiempo(),
       this.letrasAdivinadas().length
     )
   }
 
+  async obtenerRecord() {
+    const data = await this.puntajeAhorcadoService.obtenerRecord();
+
+    if(data) {
+      this.record.set(data.puntaje);
+    }
+  }
 }

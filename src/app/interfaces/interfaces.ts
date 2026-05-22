@@ -17,3 +17,11 @@ export interface User {
   edad: number;
   password: string;
 }
+
+export interface Mensaje {
+  id: number;
+  user_id: number;
+  contenido: string;
+  usuarios?: User;
+  created_at: string;
+}

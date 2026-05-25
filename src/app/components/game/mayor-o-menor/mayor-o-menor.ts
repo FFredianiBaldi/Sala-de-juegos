@@ -37,6 +37,7 @@ export class MayorOMenor {
     this.puntos.set(0);
     this.mensaje.set('');
     this.gameOver.set(false);
+    this.siguienteCarta.set(null);
   }
 
   mezclarMazo(mazo: Carta[]) {

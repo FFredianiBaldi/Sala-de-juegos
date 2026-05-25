@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Carta } from '../../../interfaces/interfaces';
+import { PuntajeMayorMenorService } from '../../../services/puntaje-mayor-menor.service';
 
 @Component({
   selector: 'app-mayor-o-menor',
@@ -9,6 +10,9 @@ import { Carta } from '../../../interfaces/interfaces';
 })
 export class MayorOMenor {
 
+  puntajeMayorMenorService = inject(PuntajeMayorMenorService);
+  record = signal<number | null>(null);
+
   animando = signal(false);
   cartaAnimada = signal<Carta | null>(null);
 
@@ -17,12 +21,13 @@ export class MayorOMenor {
   cartaActual = signal<Carta | null>(null);
   siguienteCarta = signal<Carta | null>(null);
 
-  puntos = signal(0);
+  puntaje = signal(0);
   mensaje = signal('');
   gameOver = signal(false);
 
   constructor() {
-    this.iniciarJuego()
+    this.iniciarJuego();
+    this.obtenerRecord();
   }
 
   iniciarJuego() {
@@ -38,7 +43,7 @@ export class MayorOMenor {
     this.mezclarMazo(nuevoMazo);
     this.mazo.set(nuevoMazo);
     this.cartaActual.set(nuevoMazo.pop()!);
-    this.puntos.set(0);
+    this.puntaje.set(0);
     this.mensaje.set('');
     this.gameOver.set(false);
     this.siguienteCarta.set(null);
@@ -79,12 +84,13 @@ export class MayorOMenor {
         (eleccion === 'menor' && valorNuevo < valorActual);
 
       if (acerto) {
-        this.puntos.update(p => p + 1);
+        this.puntaje.update(p => p + 1);
         this.cartaActual.set(nuevaCarta);
         this.mensaje.set('¡Correcto!');
         this.siguienteCarta.set(null);
       } else {
 
+        this.subirRecord();
         this.gameOver.set(true);
         this.mensaje.set('Perdiste');
 
@@ -95,5 +101,18 @@ export class MayorOMenor {
 
     }, 700);
 
+  }
+
+  async subirRecord() {
+    await this.puntajeMayorMenorService.subirRecord(this.puntaje());
+    await this.obtenerRecord();
+  }
+
+  async obtenerRecord() {
+    const data = await this.puntajeMayorMenorService.obtenerRecord();
+
+    if(data) {
+      this.record.set(data.puntaje);
+    }
   }
 }

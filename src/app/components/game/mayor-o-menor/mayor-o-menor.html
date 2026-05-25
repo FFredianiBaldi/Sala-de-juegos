@@ -1,1 +1,26 @@
-<p>mayor-o-menor works!</p>
+<main>
+  <h1>Mayor o menor</h1>
+
+  <p>
+    Puntos: {{puntos()}}
+  </p>
+
+  @if (cartaActual()) {
+    <h2>
+      {{cartaActual()!.valor}}-{{cartaActual()!.palo}}
+    </h2>
+  }
+
+  <button (click)="jugar('mayor')">Mayor</button>
+  <button (click)="jugar('menor')">Menor</button>
+
+  <p>{{mensaje()}}</p>
+
+  @if (siguienteCarta() && gameOver()) {
+    <p>Siguiente carta: {{siguienteCarta()!.valor}}-{{siguienteCarta()!.palo}}</p>
+  }
+
+  @if (gameOver()) {
+    <button (click)="iniciarJuego()">Jugar otra vez</button>
+  }
+</main>

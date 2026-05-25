@@ -25,3 +25,10 @@ export interface Mensaje {
   usuarios?: User;
   created_at: string;
 }
+
+// elementos de juegos
+
+export interface Carta {
+  valor: number;
+  palo: string;
+}

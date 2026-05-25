@@ -8,6 +8,10 @@ import { Carta } from '../../../interfaces/interfaces';
   styleUrl: './mayor-o-menor.css',
 })
 export class MayorOMenor {
+
+  animando = signal(false);
+  cartaAnimada = signal<Carta | null>(null);
+
   mazo = signal<Carta[]>([]);
 
   cartaActual = signal<Carta | null>(null);
@@ -49,30 +53,47 @@ export class MayorOMenor {
   }
 
   jugar(eleccion: 'mayor' | 'menor') {
-    if(this.gameOver()) return;
-
-    const mazoActual = this.mazo();
-    const actual = this.cartaActual();
-
-    if(!actual || mazoActual.length === 0) return;
-
-    const siguiente = mazoActual.pop()!;
-    this.siguienteCarta.set(siguiente);
-
-    let acerto = false;
-    if(eleccion === 'mayor') {
-      acerto = siguiente.valor > actual.valor;
-    } else {
-      acerto = siguiente.valor < actual.valor;
+    if (this.mazo().length === 0 || this.gameOver()) {
+      return;
     }
 
-    if(acerto) {
-      this.puntos.update(p => p + 1);
-      this.mensaje.set('Acertaste');
-      this.cartaActual.set(siguiente);
-    } else {
-      this.mensaje.set('Perdiste');
-      this.gameOver.set(true);
-    }
+    const siguiente = this.mazo()[0];
+
+    this.cartaAnimada.set(siguiente);
+    this.animando.set(true);
+
+    setTimeout(() => {
+
+      const nuevaCarta = this.mazo().shift();
+      if (!nuevaCarta || !this.cartaActual()) {
+        return;
+      }
+
+      this.siguienteCarta.set(nuevaCarta);
+
+      const valorActual = this.cartaActual()!.valor;
+      const valorNuevo = nuevaCarta.valor;
+
+      const acerto =
+        (eleccion === 'mayor' && valorNuevo > valorActual) ||
+        (eleccion === 'menor' && valorNuevo < valorActual);
+
+      if (acerto) {
+        this.puntos.update(p => p + 1);
+        this.cartaActual.set(nuevaCarta);
+        this.mensaje.set('¡Correcto!');
+        this.siguienteCarta.set(null);
+      } else {
+
+        this.gameOver.set(true);
+        this.mensaje.set('Perdiste');
+
+      }
+
+      this.animando.set(false);
+      this.cartaAnimada.set(null);
+
+    }, 700);
+
   }
 }

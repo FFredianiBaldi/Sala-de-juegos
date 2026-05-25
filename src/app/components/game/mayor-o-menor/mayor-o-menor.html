@@ -61,7 +61,7 @@
 
             </div>
 
-            <div class="text-center">
+            <div class="text-center position-relative">
 
               <h5 class="mb-3 text-muted">
                 Mazo
@@ -74,6 +74,18 @@
                 style="max-width: 180px;"
               >
 
+              @if (cartaAnimada()) {
+
+                <img
+                  [src]="'cartas/' + cartaAnimada()!.palo + '-' + cartaAnimada()!.valor + '.png'"
+                  alt="Carta animada"
+                  class="img-fluid rounded shadow position-absolute top-0 start-0"
+                  style="max-width: 180px; margin-top: 42px;"
+                  [class.mover]="animando()"
+                >
+
+              }
+
             </div>
 
           </div>
@@ -84,7 +96,8 @@
 
               <button
                 class="btn btn-success btn-lg px-4"
-                (click)="jugar('mayor')">
+                (click)="jugar('mayor')"
+                [disabled]="animando()">
 
                 Mayor
 
@@ -92,7 +105,8 @@
 
               <button
                 class="btn btn-danger btn-lg px-4"
-                (click)="jugar('menor')">
+                (click)="jugar('menor')"
+                [disabled]="animando()">
 
                 Menor
 

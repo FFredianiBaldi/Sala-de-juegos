@@ -24,6 +24,7 @@ export class Login {
   constructor (private userService: UserService, private router: Router) {}
 
   userModel = signal<User>({
+    id: 0,
     email: '',
     password: '',
     nombre: '',
@@ -62,6 +63,7 @@ export class Login {
 
   async quickLogin(email:string) {
     this.userModel.set({
+      id: 0,
       email:email,
       password:'contraseña1234',
       nombre: '',

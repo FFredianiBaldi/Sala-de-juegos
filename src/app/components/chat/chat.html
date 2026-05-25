@@ -1,0 +1,94 @@
+<main class="container py-4 d-flex justify-content-center">
+
+  <div
+    class="card shadow-lg w-100 border-0 bg-dark text-light"
+    style="max-width: 900px; height: 85vh;"
+  >
+
+    <div class="card-header bg-black text-center border-secondary">
+
+      <h1 class="h3 m-0 text-primary">
+        Sala de chat
+      </h1>
+
+    </div>
+
+    <section
+      #chatContainer
+      class="card-body overflow-auto d-flex flex-column gap-3 bg-dark-subtle"
+    >
+
+      @for (mensaje of mensajes(); track mensaje.id) {
+
+        <div
+          class="d-flex"
+          [class.justify-content-end]="mensaje.user_id === userService.currentUser()?.id"
+          [class.justify-content-start]="mensaje.user_id !== userService.currentUser()?.id"
+        >
+
+          <div
+            class="rounded shadow-sm p-3 border"
+            [class.bg-primary]="mensaje.user_id === userService.currentUser()?.id"
+            [class.text-white]="mensaje.user_id === userService.currentUser()?.id"
+            [class.bg-dark]="mensaje.user_id !== userService.currentUser()?.id"
+            style="max-width: 75%;"
+          >
+
+            <div class="d-flex justify-content-between align-items-center gap-3 mb-2">
+
+              <strong
+                [class.text-white]="mensaje.user_id === userService.currentUser()?.id"
+                [class.text-info]="mensaje.user_id !== userService.currentUser()?.id"
+              >
+                {{ mensaje.usuarios?.nombre }}
+                {{ mensaje.usuarios?.apellido }}
+              </strong>
+
+              <small
+                [class.text-light]="mensaje.user_id === userService.currentUser()?.id"
+                [class.text-secondary]="mensaje.user_id !== userService.currentUser()?.id"
+              >
+                {{ mensaje.created_at | date:'HH:mm' }}
+              </small>
+
+            </div>
+
+            <p class="m-0">
+              {{ mensaje.contenido }}
+            </p>
+
+          </div>
+
+        </div>
+
+      }
+
+    </section>
+
+    <section class="card-footer bg-black border-secondary">
+
+      <div class="input-group">
+
+        <input
+          type="text"
+          class="form-control bg-dark text-light border-secondary"
+          [ngModel]="mensaje()"
+          (ngModelChange)="mensaje.set($event)"
+          (keydown.enter)="enviarMensaje()"
+          placeholder="Escribí un mensaje"
+        >
+
+        <button
+          class="btn btn-primary"
+          (click)="enviarMensaje()"
+        >
+          Enviar
+        </button>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</main>

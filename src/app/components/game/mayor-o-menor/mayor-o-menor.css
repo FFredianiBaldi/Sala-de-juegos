@@ -1,0 +1,13 @@
+@keyframes moverCarta {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-230px);
+  }
+}
+
+.mover {
+  animation: moverCarta 700ms ease-in-out forwards;
+}

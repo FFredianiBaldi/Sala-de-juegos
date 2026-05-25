@@ -10,9 +10,25 @@ export interface GithubUser {
 }
 
 export interface User {
+  id: number;
   email: string;
   nombre: string;
   apellido: string;
   edad: number;
   password: string;
+}
+
+export interface Mensaje {
+  id: number;
+  user_id: number;
+  contenido: string;
+  usuarios?: User;
+  created_at: string;
+}
+
+// elementos de juegos
+
+export interface Carta {
+  valor: number;
+  palo: string;
 }

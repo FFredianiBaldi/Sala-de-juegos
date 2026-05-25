@@ -30,14 +30,24 @@
           </button>
 
           <ul class="dropdown-menu">
+
             <li>
               <button
-                class="dropdown-item"
-                (click)="logout()"
+              class="dropdown-item"
+              routerLink="/chat"
               >
-                Cerrar sesión
-              </button>
-            </li>
+              Sala de chat
+            </button>
+          </li>
+
+          <li>
+            <button
+              class="dropdown-item"
+              (click)="logout()"
+            >
+              Cerrar sesión
+            </button>
+          </li>
           </ul>
         </div>
       </div>

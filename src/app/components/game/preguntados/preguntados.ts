@@ -148,6 +148,7 @@ export class Preguntados {
 
     if(siguienteIndice >= this.preguntas().length) {
       this.terminarJuego(true);
+      this.preguntadosService.subirRecord(this.puntaje());
       return;
     }
 

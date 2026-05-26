@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Generico } from '../../../modals/generico/generico';
+import { PuntajeSimonDiceService } from '../../../services/puntaje-simon-dice.service';
 
 @Component({
   selector: 'app-simon-dice',
@@ -25,7 +26,12 @@ export class SimonDice {
   ronda = signal(0);
   puntaje = signal(0);
 
-  iniciarJuego() {
+  record = signal<number | null>(null);
+
+  puntajeSimonDiceService = inject(PuntajeSimonDiceService);
+
+  async iniciarJuego() {
+    await this.obtenerRecord();
     this.secuencia.set([]);
     this.secuenciaUsuario.set([]);
     this.ronda.set(0);
@@ -67,7 +73,7 @@ export class SimonDice {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  seleccionarColor(color: string) {
+  async seleccionarColor(color: string) {
     if(this.bloqueado()) return;
 
     const intento = [...this.secuenciaUsuario(), color];
@@ -76,7 +82,7 @@ export class SimonDice {
 
     if(intento[indice] !== this.secuencia()[indice]) {
 
-      this.perder();
+      await this.perder();
 
       return;
     }
@@ -91,20 +97,18 @@ export class SimonDice {
     }
   }
 
-  perder() {
+  async perder() {
     this.jugando.set(false);
 
-    this.tituloModal.set('Perdiste');
-    this.mensajeModal.set(
-      `Llegaste a la ronda ${this.ronda()}`
-    );
+    await this.puntajeSimonDiceService.subirRecord(this.puntaje());
 
-    this.modalAbierto.set(true);
+    await this.obtenerRecord();
 
     this.tituloModal.set('Perdiste');
     this.mensajeModal.set(
       `Llegaste a la ronda ${this.ronda()}`
     );
+
     this.modalAbierto.set(true);
   }
 
@@ -117,5 +121,14 @@ export class SimonDice {
     this.ronda.set(0);
     this.puntaje.set(0);
     this.bloqueado.set(false);
+  }
+
+  async obtenerRecord() {
+
+    const data = await this.puntajeSimonDiceService.obtenerRecord();
+
+    if(data) {
+      this.record.set(data.puntaje);
+    }
   }
 }

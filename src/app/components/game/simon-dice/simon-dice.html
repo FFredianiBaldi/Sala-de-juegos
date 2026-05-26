@@ -1,1 +1,182 @@
-<p>simon-dice works!</p>
+<div class="container py-5">
+
+  <div class="row justify-content-center">
+
+    <div class="col-12 col-md-8 col-lg-6">
+
+      <div class="card shadow-lg border-0">
+
+        <div class="card-body text-center p-4">
+
+          <h1 class="fw-bold mb-4">
+            Simon Dice
+          </h1>
+
+          @if (!jugando()) {
+
+            <div class="py-4">
+
+              <img
+                src="game-imgs/simon-dice.png"
+                alt="Simon Dice"
+                class="img-fluid mb-4"
+                style="max-width: 220px;"
+              >
+
+              <p class="lead mb-4">
+                Memoriza la secuencia y repetila correctamente.
+              </p>
+
+              <button
+                class="btn btn-primary btn-lg px-5"
+                (click)="iniciarJuego()">
+
+                Jugar
+
+              </button>
+
+            </div>
+
+          } @else {
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+              <div>
+
+                <h6 class="text-muted mb-1">
+                  Récord
+                </h6>
+
+                <h3 class="fw-bold text-warning mb-0">
+                  {{ record() ?? 0 }}
+                </h3>
+
+              </div>
+
+              <div>
+
+                <h6 class="text-muted mb-1">
+                  Puntaje
+                </h6>
+
+                <h3 class="fw-bold text-success mb-0">
+                  {{ puntaje() }}
+                </h3>
+
+              </div>
+
+              <div>
+
+                <h6 class="text-muted mb-1">
+                  Ronda
+                </h6>
+
+                <h3 class="fw-bold text-primary mb-0">
+                  {{ ronda() }}
+                </h3>
+
+              </div>
+
+            </div>
+
+            <div class="row g-3">
+
+              <div class="col-6">
+
+                <button
+                  class="btn w-100 py-5 border border-3"
+                  [class.btn-danger]="colorActivo() === 'rojo'"
+                  [class.btn-outline-danger]="colorActivo() !== 'rojo'"
+                  (click)="seleccionarColor('rojo')"
+                  [disabled]="bloqueado()">
+
+                  ROJO
+
+                </button>
+
+              </div>
+
+              <div class="col-6">
+
+                <button
+                  class="btn w-100 py-5 border border-3"
+                  [class.btn-success]="colorActivo() === 'verde'"
+                  [class.btn-outline-success]="colorActivo() !== 'verde'"
+                  (click)="seleccionarColor('verde')"
+                  [disabled]="bloqueado()">
+
+                  VERDE
+
+                </button>
+
+              </div>
+
+              <div class="col-6">
+
+                <button
+                  class="btn w-100 py-5 border border-3"
+                  [class.btn-primary]="colorActivo() === 'azul'"
+                  [class.btn-outline-primary]="colorActivo() !== 'azul'"
+                  (click)="seleccionarColor('azul')"
+                  [disabled]="bloqueado()">
+
+                  AZUL
+
+                </button>
+
+              </div>
+
+              <div class="col-6">
+
+                <button
+                  class="btn w-100 py-5 border border-3"
+                  [class.btn-warning]="colorActivo() === 'amarillo'"
+                  [class.btn-outline-warning]="colorActivo() !== 'amarillo'"
+                  (click)="seleccionarColor('amarillo')"
+                  [disabled]="bloqueado()">
+
+                  AMARILLO
+
+                </button>
+
+              </div>
+
+            </div>
+
+            @if (bloqueado()) {
+
+              <div class="alert alert-info mt-4 mb-0">
+
+                Memoriza la secuencia...
+
+              </div>
+
+            } @else {
+
+              <div class="alert alert-secondary mt-4 mb-0">
+
+                Tu turno
+
+              </div>
+
+            }
+
+          }
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<app-generico
+  [abierto]="modalAbierto()"
+  [titulo]="tituloModal()"
+  [mensaje]="mensajeModal()"
+  textoBoton="Volver al menú"
+  (cerrar)="cerrarModal()">
+</app-generico>

@@ -1,1 +1,233 @@
-<p>preguntados works!</p>
+<div class="container py-5">
+
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+
+      <div class="card shadow-lg border-0">
+
+        <div class="card-body p-4">
+
+          <h1 class="text-center mb-4">
+            Preguntados
+          </h1>
+
+          @if (!juegoIniciado()) {
+
+            <div class="text-center py-5">
+
+              <img
+                src="game-imgs/preguntados.png"
+                alt="Preguntados"
+                class="img-fluid mb-4"
+                style="max-width: 220px;"
+              >
+
+              <p class="lead mb-4">
+                Responde correctamente la mayor cantidad de preguntas posible.
+              </p>
+
+              <button
+                class="btn btn-primary btn-lg px-5"
+                (click)="iniciarJuego()">
+
+                Jugar
+
+              </button>
+
+            </div>
+
+          } @else {
+
+            @if (cargando()) {
+
+              <div class="text-center py-5">
+
+                <div class="spinner-border text-primary mb-3"></div>
+
+                <p>
+                  Cargando preguntas...
+                </p>
+
+              </div>
+
+            }
+
+            @if (error()) {
+
+              <div class="alert alert-danger text-center">
+
+                {{ error() }}
+
+              </div>
+
+            }
+
+            @if (preguntaActual()) {
+
+              <div class="mb-4">
+
+                <div class="d-flex justify-content-center mb-4">
+
+                  <div
+                    class="position-relative"
+                    style="width: 130px; height: 130px;">
+
+                    <svg
+                      width="130"
+                      height="130"
+                      class="position-absolute top-0 start-0">
+
+                      <circle
+                        cx="65"
+                        cy="65"
+                        r="55"
+                        stroke="#dee2e6"
+                        stroke-width="10"
+                        fill="none">
+                      </circle>
+
+                      <circle
+                        cx="65"
+                        cy="65"
+                        r="55"
+                        stroke="limegreen"
+                        stroke-width="10"
+                        fill="none"
+                        stroke-linecap="round"
+                        [attr.stroke-dasharray]="345.5"
+                        [attr.stroke-dashoffset]="345.5 - ((tiempoRestante() / tiempoMaximo) * 345.5)"
+                        transform="rotate(-90 65 65)"
+                        style="transition: stroke-dashoffset 1s linear;">
+                      </circle>
+
+                    </svg>
+
+                    <div
+                      class="position-absolute top-50 start-50 translate-middle text-center">
+
+                      <div
+                        class="fw-bold"
+                        style="font-size: 2rem;"
+                        [class.text-danger]="tiempoRestante() <= 3"
+                        [class.text-success]="tiempoRestante() > 3">
+
+                        {{ tiempoRestante() }}
+
+                      </div>
+
+                      <small class="text-muted">
+                        segundos
+                      </small>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="d-flex align-items-center gap-3 mb-4">
+
+                  <div class="text-center">
+
+                    <h6 class="text-muted mb-1">
+                      Puntaje
+                    </h6>
+
+                    <h3 class="fw-bold text-primary mb-0">
+
+                      {{ puntaje() }}
+
+                    </h3>
+
+                  </div>
+
+                  <div class="text-center">
+
+                    <h6 class="text-muted mb-1">
+                      Record
+                    </h6>
+
+                    <h3 class="fw-bold text-warning mb-0">
+
+                      {{ record() ?? 0 }}
+
+                    </h3>
+
+                  </div>
+
+                  <div class="flex-grow-1">
+
+                    <div
+                      class="progress"
+                      role="progressbar"
+                      aria-valuemin="0"
+                      [attr.aria-valuenow]="vidas()"
+                      [attr.aria-valuemax]="maxVidas"
+                      style="height: 30px;">
+
+                      <div
+                        class="progress-bar bg-danger fw-bold"
+                        [style.width.%]="(vidas() / maxVidas) * 100">
+
+                        {{ vidas() }}/{{ maxVidas }} vidas
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  <span class="badge bg-secondary fs-6">
+                    {{ indicePreguntaActual() + 1 }}/{{ preguntas().length }}
+                  </span>
+
+                </div>
+
+                <h3 class="text-center fw-bold mb-4">
+
+                  {{ preguntaActual()?.question }}
+
+                </h3>
+
+                <div class="d-grid gap-3">
+
+                  @for (respuesta of respuestas(); track respuesta) {
+
+                    <button
+                      class="btn btn-lg"
+                      [class.btn-success]="respuestaSeleccionada() === respuesta && respuesta === preguntaActual()?.correctAnswers"
+                      [class.btn-danger]="respuestaSeleccionada() === respuesta && respuesta !== preguntaActual()?.correctAnswers"
+                      [class.btn-outline-primary]="respuestaSeleccionada() !== respuesta"
+                      [disabled]="respuestaSeleccionada() !== ''"
+                      (click)="responder(respuesta)">
+
+                      {{ respuesta }}
+
+                    </button>
+
+                  }
+
+                </div>
+
+              </div>
+
+            }
+
+          }
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<app-generico
+  [abierto]="modalAbierto()"
+  [titulo]="tituloModal()"
+  [mensaje]="mensajeModal()"
+  textoBoton="Volver al menu de Preguntados"
+  (cerrar)="cerrarModal()">
+</app-generico>

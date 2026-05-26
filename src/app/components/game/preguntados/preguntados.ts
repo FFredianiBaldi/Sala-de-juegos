@@ -9,6 +9,8 @@ import { Generico } from '../../../modals/generico/generico';
   styleUrl: './preguntados.css',
 })
 export class Preguntados {
+  record = signal<number | null>(null);
+
   modalAbierto = signal(false);
   tituloModal = signal('');
   mensajeModal = signal('');
@@ -70,6 +72,7 @@ export class Preguntados {
     this.juegoIniciado.set(true);
     this.obtenerPreguntas();
     this.modalAbierto.set(false);
+    this.obtenerRecord();
   }
 
   cargarPreguntaActual() {
@@ -165,5 +168,13 @@ export class Preguntados {
     this.respuestas.set([]);
     this.indicePreguntaActual.set(0);
     this.respuestaSeleccionada.set('');
+  }
+
+  async obtenerRecord() {
+    const data = await this.preguntadosService.obtenerRecord();
+
+    if(data) {
+      this.record.set(data.puntaje);
+    }
   }
 }

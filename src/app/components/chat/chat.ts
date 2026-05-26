@@ -12,13 +12,11 @@ import { UserService } from '../../services/user.service';
 })
 export class Chat {
   protected userService = inject(UserService);
+  private chatService = inject(ChatService);
 
   chatContainer = viewChild<ElementRef>('chatContainer');
 
-  private chatService = inject(ChatService);
-
   mensaje = signal('');
-
   mensajes = this.chatService.mensajes;
 
   constructor() {
@@ -40,7 +38,6 @@ export class Chat {
 
   async enviarMensaje() {
     const contenido = this.mensaje().trim();
-
     if(!contenido) return;
 
     await this.chatService.enviarMensaje(contenido);

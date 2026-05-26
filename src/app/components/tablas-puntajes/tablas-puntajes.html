@@ -1,0 +1,199 @@
+<div class="container py-5">
+
+  <div class="row justify-content-center mb-4">
+    <div class="col-12 text-center">
+      <h1 class="fw-bold">Ranking</h1>
+      <p class="text-secondary">
+        Mejores puntajes de cada juego
+      </p>
+    </div>
+  </div>
+
+  <div class="row g-4">
+
+    <!-- AHORCADO -->
+    <div class="col-12 col-lg-6">
+      <div class="card bg-dark-subtle border-secondary shadow-lg h-100">
+
+        <div class="card-header border-secondary">
+          <h3 class="mb-0 text-center">Ahorcado</h3>
+        </div>
+
+        <div class="card-body p-0">
+
+          <table class="table table-dark table-striped table-hover mb-0 align-middle">
+
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Jugador</th>
+                <th>Puntaje</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              @for (puntaje of ahorcado(); track puntaje.id; let i = $index) {
+
+                <tr>
+                  <td>{{ i + 1 }}</td>
+
+                  <td>
+                    {{ puntaje.usuarios?.nombre }}
+                    {{ puntaje.usuarios?.apellido }}
+                  </td>
+
+                  <td>{{ puntaje.puntaje }}</td>
+                </tr>
+
+              }
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- MAYOR O MENOR -->
+    <div class="col-12 col-lg-6">
+      <div class="card bg-dark-subtle border-secondary shadow-lg h-100">
+
+        <div class="card-header border-secondary">
+          <h3 class="mb-0 text-center">Mayor o Menor</h3>
+        </div>
+
+        <div class="card-body p-0">
+
+          <table class="table table-dark table-striped table-hover mb-0 align-middle">
+
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Jugador</th>
+                <th>Puntaje</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              @for (puntaje of mayorMenor(); track puntaje.id; let i = $index) {
+
+                <tr>
+                  <td>{{ i + 1 }}</td>
+
+                  <td>
+                    {{ puntaje.usuarios?.nombre }}
+                    {{ puntaje.usuarios?.apellido }}
+                  </td>
+
+                  <td>{{ puntaje.puntaje }}</td>
+                </tr>
+
+              }
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PREGUNTADOS -->
+    <div class="col-12 col-lg-6">
+      <div class="card bg-dark-subtle border-secondary shadow-lg h-100">
+
+        <div class="card-header border-secondary">
+          <h3 class="mb-0 text-center">Preguntados</h3>
+        </div>
+
+        <div class="card-body p-0">
+
+          <table class="table table-dark table-striped table-hover mb-0 align-middle">
+
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Jugador</th>
+                <th>Puntaje</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              @for (puntaje of preguntados(); track puntaje.id; let i = $index) {
+
+                <tr>
+                  <td>{{ i + 1 }}</td>
+
+                  <td>
+                    {{ puntaje.usuarios?.nombre }}
+                    {{ puntaje.usuarios?.apellido }}
+                  </td>
+
+                  <td>{{ puntaje.puntaje }}</td>
+                </tr>
+
+              }
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SIMON DICE -->
+    <div class="col-12 col-lg-6">
+      <div class="card bg-dark-subtle border-secondary shadow-lg h-100">
+
+        <div class="card-header border-secondary">
+          <h3 class="mb-0 text-center">Simon Dice</h3>
+        </div>
+
+        <div class="card-body p-0">
+
+          <table class="table table-dark table-striped table-hover mb-0 align-middle">
+
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Jugador</th>
+                <th>Puntaje</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              @for (puntaje of simon(); track puntaje.id; let i = $index) {
+
+                <tr>
+                  <td>{{ i + 1 }}</td>
+
+                  <td>
+                    {{ puntaje.usuarios?.nombre }}
+                    {{ puntaje.usuarios?.apellido }}
+                  </td>
+
+                  <td>{{ puntaje.puntaje }}</td>
+                </tr>
+
+              }
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

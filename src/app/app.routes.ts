@@ -8,6 +8,7 @@ import { authGuard } from './guards/auth-guard';
 import { loginGuard } from './guards/login-guard';
 import { Chat } from './components/chat/chat';
 import { TablasPuntajes } from './components/tablas-puntajes/tablas-puntajes';
+import { Encuesta } from './components/encuesta/encuesta';
 
 export const routes: Routes = [
   {path: '', component: Home},
@@ -18,5 +19,6 @@ export const routes: Routes = [
   {path: 'games/:id', component: Game, canActivate: [authGuard]},
 
   {path: 'chat', component:Chat, canActivate:[authGuard]},
-  {path: 'puntajes', component:TablasPuntajes}
+  {path: 'puntajes', component:TablasPuntajes},
+  {path: 'encuesta', component: Encuesta, canActivate:[authGuard]}
 ];

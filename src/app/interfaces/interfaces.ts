@@ -26,6 +26,15 @@ export interface Mensaje {
   created_at: string;
 }
 
+export interface EncuestaInterface {
+  nombre: string;
+  edad: number;
+  telefono: string;
+  juego_favorito: string;
+  gusto_pagina: string;
+  recomendaria: boolean;
+}
+
 // elementos de juegos
 
 export interface Carta {

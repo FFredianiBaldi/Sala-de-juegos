@@ -1,0 +1,235 @@
+<div class="container mt-5">
+
+  <div class="row justify-content-center">
+
+    <div class="col-12 col-md-8 col-lg-6">
+
+      <div class="card shadow border-secondary rounded-4">
+
+        <div class="card-body p-4">
+
+          <h2 class="text-center mb-4">
+            Encuesta
+          </h2>
+
+          <form (ngSubmit)="submit()">
+
+            <!-- NOMBRE -->
+
+            <div class="mb-3">
+
+              <label class="form-label">
+                Nombre y apellido:
+              </label>
+
+              <input
+                type="text"
+                [formField]="encuestaForm.nombre"
+                class="form-control"
+                [class.is-invalid]="
+                  (encuestaForm.nombre().touched() || submitted()) &&
+                  encuestaForm.nombre().invalid()
+                "
+              />
+
+              @if (
+                (encuestaForm.nombre().touched() || submitted()) &&
+                encuestaForm.nombre().invalid()
+              ) {
+
+                <small class="invalid-feedback d-block">
+                  El nombre es obligatorio
+                </small>
+
+              }
+
+            </div>
+
+            <!-- EDAD -->
+
+            <div class="mb-3">
+
+              <label class="form-label">
+                Edad:
+              </label>
+
+              <input
+                type="number"
+                [formField]="encuestaForm.edad"
+                class="form-control"
+                [class.is-invalid]="
+                  (encuestaForm.edad().touched() || submitted()) &&
+                  encuestaForm.edad().invalid()
+                "
+              />
+
+              @if (
+                (encuestaForm.edad().touched() || submitted()) &&
+                encuestaForm.edad().invalid()
+              ) {
+
+                <small class="invalid-feedback d-block">
+                  La edad debe ser entre 18 y 99
+                </small>
+
+              }
+
+            </div>
+
+            <!-- TELEFONO -->
+
+            <div class="mb-3">
+
+              <label class="form-label">
+                Teléfono:
+              </label>
+
+              <input
+                type="text"
+                [formField]="encuestaForm.telefono"
+                class="form-control"
+                [class.is-invalid]="
+                  (encuestaForm.telefono().touched() || submitted()) &&
+                  encuestaForm.telefono().invalid()
+                "
+              />
+
+              @if (
+                (encuestaForm.telefono().touched() || submitted()) &&
+                encuestaForm.telefono().invalid()
+              ) {
+
+                <small class="invalid-feedback d-block">
+                  Solo números y máximo 10 caracteres
+                </small>
+
+              }
+
+            </div>
+
+            <!-- PREGUNTA 1 -->
+
+            <div class="mb-4">
+
+              <label class="form-label">
+                Juego favorito:
+              </label>
+
+              <select
+                [formField]="encuestaForm.juego_favorito"
+                class="form-select"
+              >
+
+                <option value="">
+                  Seleccionar
+                </option>
+
+                <option value="ahorcado">
+                  Ahorcado
+                </option>
+
+                <option value="preguntados">
+                  Preguntados
+                </option>
+
+                <option value="simon">
+                  Simon Dice
+                </option>
+
+                <option value="mayor-menor">
+                  Mayor o Menor
+                </option>
+
+              </select>
+
+            </div>
+
+            <!-- PREGUNTA 2 -->
+
+            <div class="mb-4">
+
+              <label class="form-label d-block">
+                ¿Te gustó la página?
+              </label>
+
+              <div class="form-check">
+
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  value="si"
+                  [formField]="encuestaForm.gusto_pagina"
+                  id="si"
+                >
+
+                <label class="form-check-label" for="si">
+                  Sí
+                </label>
+
+              </div>
+
+              <div class="form-check">
+
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  value="no"
+                  [formField]="encuestaForm.gusto_pagina"
+                  id="no"
+                >
+
+                <label class="form-check-label" for="no">
+                  No
+                </label>
+
+              </div>
+
+            </div>
+
+            <!-- PREGUNTA 3 -->
+
+            <div class="mb-4">
+
+              <div class="form-check">
+
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  [formField]="encuestaForm.recomendaria"
+                  id="recomendaria"
+                >
+
+                <label class="form-check-label" for="recomendaria">
+                  Recomendaría esta página
+                </label>
+
+              </div>
+
+            </div>
+
+            <!-- BOTON -->
+
+            <div class="d-flex justify-content-center">
+
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg"
+              >
+
+                Enviar encuesta
+
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

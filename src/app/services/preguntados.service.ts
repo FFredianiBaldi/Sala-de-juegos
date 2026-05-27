@@ -78,7 +78,7 @@ export class PreguntadosService {
       headers,
       params: {
         limit: 10,
-        page: 1,
+        page: Math.floor(Math.random() * 16) + 1,
         format: 'multiple'
       }
     })

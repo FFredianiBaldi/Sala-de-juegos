@@ -3,13 +3,21 @@ import { FormsModule } from '@angular/forms';
 import { form, required, min, max, pattern, FormField } from '@angular/forms/signals';
 import { EncuestaInterface } from '../../interfaces/interfaces';
 import { EncuestaService } from '../../services/encuesta.service';
+import { Generico } from '../../modals/generico/generico';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-encuesta',
-  imports: [FormField, FormsModule],
+  imports: [FormField, FormsModule, Generico],
   templateUrl: './encuesta.html',
   styleUrl: './encuesta.css',
 })
 export class Encuesta {
+  router = inject(Router);
+
+  modalAbierto = signal(false);
+  tituloModal = signal('');
+  mensajeModal = signal('');
 
   loading = signal(false);
 
@@ -59,6 +67,10 @@ export class Encuesta {
 
       await this.encuestaService.subirEncuesta(this.encuestaModel());
 
+      this.tituloModal.set('Completado');
+      this.mensajeModal.set('Formulario enviado con exito')
+      this.modalAbierto.set(true);
+
     } catch (error:any) {
 
       console.error(error);
@@ -69,6 +81,11 @@ export class Encuesta {
 
     }
 
+  }
+
+  cerrarModal() {
+    this.modalAbierto.set(false);
+    this.router.navigate(['']);
   }
 
 }

@@ -25,7 +25,8 @@ export class Register {
     nombre: '',
     apellido: '',
     edad: 0,
-    password: ''
+    password: '',
+    es_admin: false
   })
 
   registerForm = form(this.userModel, (path) => {

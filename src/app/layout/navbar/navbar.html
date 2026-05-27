@@ -58,6 +58,17 @@
             </button>
           </li>
 
+          @if (userService.currentUser()?.es_admin) {
+            <li>
+              <button
+              class="dropdown-item"
+              routerLink="/admin-dashboard">
+                Admin Dashboard
+              </button>
+            </li>
+          }
+
+
 
           <li>
             <button

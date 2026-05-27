@@ -16,6 +16,7 @@ export interface User {
   apellido: string;
   edad: number;
   password: string;
+  es_admin: boolean;
 }
 
 export interface Mensaje {

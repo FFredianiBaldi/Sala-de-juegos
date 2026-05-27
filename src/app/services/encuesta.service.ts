@@ -22,4 +22,17 @@ export class EncuestaService {
 
     return data;
   }
+
+  async obtenerEncuestas() {
+    const {data, error} = await this.supabase
+      .from('encuestas')
+      .select('*')
+
+    if(error) {
+      console.error(error);
+      throw error;
+    }
+
+    return data;
+  }
 }

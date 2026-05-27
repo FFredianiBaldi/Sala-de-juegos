@@ -9,6 +9,8 @@ import { loginGuard } from './guards/login-guard';
 import { Chat } from './components/chat/chat';
 import { TablasPuntajes } from './components/tablas-puntajes/tablas-puntajes';
 import { Encuesta } from './components/encuesta/encuesta';
+import { Dashboard } from './components/admin/dashboard/dashboard';
+import { adminGuard } from './guards/admin-guard';
 
 export const routes: Routes = [
   {path: '', component: Home},
@@ -20,5 +22,7 @@ export const routes: Routes = [
 
   {path: 'chat', component:Chat, canActivate:[authGuard]},
   {path: 'puntajes', component:TablasPuntajes},
-  {path: 'encuesta', component: Encuesta, canActivate:[authGuard]}
+  {path: 'encuesta', component: Encuesta, canActivate:[authGuard]},
+
+  {path: 'admin-dashboard', component: Dashboard, canActivate: [adminGuard]}
 ];

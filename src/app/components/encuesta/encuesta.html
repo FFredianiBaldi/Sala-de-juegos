@@ -233,3 +233,11 @@
   </div>
 
 </div>
+
+<app-generico
+  [abierto]="modalAbierto()"
+  [titulo]="tituloModal()"
+  [mensaje]="mensajeModal()"
+  textoBoton="Continuar"
+  (cerrar)="cerrarModal()">
+</app-generico>

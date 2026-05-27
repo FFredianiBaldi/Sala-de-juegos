@@ -29,7 +29,8 @@ export class Login {
     password: '',
     nombre: '',
     apellido: '',
-    edad: 0
+    edad: 0,
+    es_admin: false
   })
 
   loginForm = form(this.userModel, (path) => {
@@ -68,7 +69,8 @@ export class Login {
       password:'contraseña1234',
       nombre: '',
       apellido: '',
-      edad: 0
+      edad: 0,
+      es_admin: false
     });
 
     await this.submit;

@@ -16,6 +16,7 @@ export interface User {
   apellido: string;
   edad: number;
   password: string;
+  es_admin: boolean;
 }
 
 export interface Mensaje {
@@ -24,6 +25,15 @@ export interface Mensaje {
   contenido: string;
   usuarios?: User;
   created_at: string;
+}
+
+export interface EncuestaInterface {
+  nombre: string;
+  edad: number;
+  telefono: string;
+  juego_favorito: string;
+  gusto_pagina: string;
+  recomendaria: boolean;
 }
 
 // elementos de juegos
